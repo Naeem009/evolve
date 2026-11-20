@@ -85,20 +85,20 @@ export function Navigation() {
   return (
     <>
       <header className="no-print sticky top-0 z-40 border-b border-sand bg-bone/95 backdrop-blur">
-        <div className="bg-ink px-4 py-2 text-center text-[11px] uppercase tracking-[0.16em] text-bone">
+        <div className="bg-ink px-3 py-2 text-center text-[10px] uppercase leading-5 tracking-[0.12em] text-balance text-bone sm:text-[11px] sm:tracking-[0.16em]">
           Free delivery over PKR 8,000 · Cash on Delivery available
         </div>
-        <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-4 px-4 md:px-8">
+        <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-2 px-3 sm:gap-4 sm:px-4 md:px-8">
           <button
             type="button"
-            className="inline-flex h-11 w-11 items-center justify-center lg:hidden"
+            className="inline-flex h-11 w-11 shrink-0 items-center justify-center lg:hidden"
             aria-label="Open menu"
             aria-expanded={menuOpen}
             onClick={() => setMenuOpen(true)}
           >
             <Menu strokeWidth={1.25} />
           </button>
-          <Link href="/" className="font-serif text-[28px] leading-none tracking-[0.28em] text-ink">
+          <Link href="/" className="min-w-0 shrink font-serif text-[22px] leading-none tracking-[0.16em] text-ink sm:text-[28px] sm:tracking-[0.28em]">
             EVOLVE
           </Link>
           <nav className="ml-6 hidden items-center gap-6 lg:flex" aria-label="Primary">
@@ -136,17 +136,17 @@ export function Navigation() {
               ),
             )}
           </nav>
-          <div className="ml-auto flex items-center">
+          <div className="ml-auto flex shrink-0 items-center">
             <button
               type="button"
-              className="inline-flex h-11 w-11 items-center justify-center"
+              className="hidden h-11 w-11 items-center justify-center lg:inline-flex"
               aria-label="Search"
               aria-expanded={searchOpen}
               onClick={() => setSearchOpen((open) => !open)}
             >
               <Search strokeWidth={1.25} />
             </button>
-            <Link href="/account" className="inline-flex h-11 w-11 items-center justify-center" aria-label="Account">
+            <Link href="/account" className="hidden h-11 w-11 items-center justify-center lg:inline-flex" aria-label="Account">
               <User strokeWidth={1.25} />
             </Link>
             <Link
@@ -156,7 +156,7 @@ export function Navigation() {
             >
               <Heart strokeWidth={1.25} />
               {wishlist.length > 0 ? (
-                <span className="absolute top-1 right-0 text-[10px]">{wishlist.length}</span>
+                <span className="absolute top-1 right-1 text-[10px]">{wishlist.length}</span>
               ) : null}
             </Link>
             <button
@@ -166,7 +166,7 @@ export function Navigation() {
               onClick={() => setDrawerOpen(true)}
             >
               <ShoppingBag strokeWidth={1.25} />
-              <span className="absolute top-1 right-0 text-[10px]">{count}</span>
+              <span className="absolute top-1 right-1 text-[10px]">{count}</span>
             </button>
           </div>
         </div>
@@ -252,23 +252,23 @@ export function Navigation() {
       ) : null}
 
       <nav
-        className="no-print fixed inset-x-0 bottom-0 z-40 grid grid-cols-5 border-t border-sand bg-bone lg:hidden"
+        className="no-print fixed inset-x-0 bottom-0 z-40 grid w-full grid-cols-5 border-t border-sand bg-bone lg:hidden"
         aria-label="Mobile"
       >
-        <Link href="/" className="flex min-h-14 flex-col items-center justify-center text-[10px] uppercase tracking-[0.12em]">
+        <Link href="/" className="flex min-h-14 min-w-0 flex-col items-center justify-center px-1 text-[10px] uppercase tracking-[0.08em]">
           Home
         </Link>
-        <button type="button" className="flex min-h-14 flex-col items-center justify-center text-[10px] uppercase tracking-[0.12em]" onClick={() => setSearchOpen(true)}>
+        <button type="button" className="flex min-h-14 min-w-0 flex-col items-center justify-center px-1 text-[10px] uppercase tracking-[0.08em]" onClick={() => setSearchOpen(true)}>
           Search
         </button>
-        <button type="button" className="flex min-h-14 flex-col items-center justify-center text-[10px] uppercase tracking-[0.12em]" onClick={() => setMenuOpen(true)}>
+        <button type="button" className="flex min-h-14 min-w-0 flex-col items-center justify-center px-1 text-[10px] uppercase tracking-[0.08em]" onClick={() => setMenuOpen(true)}>
           Shop
         </button>
-        <Link href="/account" className="flex min-h-14 flex-col items-center justify-center text-[10px] uppercase tracking-[0.12em]">
+        <Link href="/account" className="flex min-h-14 min-w-0 flex-col items-center justify-center px-1 text-[10px] uppercase tracking-[0.08em]">
           Account
         </Link>
-        <button type="button" className="flex min-h-14 flex-col items-center justify-center text-[10px] uppercase tracking-[0.12em]" onClick={() => setDrawerOpen(true)}>
-          Bag{count > 0 ? ` (${count})` : ""}
+        <button type="button" className="flex min-h-14 min-w-0 flex-col items-center justify-center px-1 text-[10px] uppercase tracking-[0.08em]" onClick={() => setDrawerOpen(true)}>
+          Bag{count > 0 ? ` ${count}` : ""}
         </button>
       </nav>
     </>
