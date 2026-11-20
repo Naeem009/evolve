@@ -14,6 +14,7 @@ const badgeLabel = {
 
 export function ProductCard({ product }: { product: Product }) {
   const price = priceLabel(product);
+  const onSale = product.badges.includes("sale") || Boolean(price.compare && price.compare > product.price);
   const soldOut = totalStock(product) <= 0;
   const low = isLowStock(product);
   const second = product.images[1];
@@ -41,7 +42,7 @@ export function ProductCard({ product }: { product: Product }) {
         <div className="absolute top-3 left-3 flex flex-col gap-1">
           {soldOut ? <span className="bg-bone px-2 py-1 text-[10px] uppercase tracking-[0.14em]">Sold out</span> : null}
           {product.badges.map((badge) => (
-            <span key={badge} className="bg-bone px-2 py-1 text-[10px] uppercase tracking-[0.14em]">
+            <span key={badge} className={`px-2 py-1 text-[10px] uppercase tracking-[0.14em] ${badge === "sale" ? "bg-sale text-bone" : "bg-bone"}`}>
               {badge === "sale" && price.off ? `${price.off}% off` : badgeLabel[badge]}
             </span>
           ))}
@@ -54,10 +55,10 @@ export function ProductCard({ product }: { product: Product }) {
           <h3 className="text-sm">
             <Link href={`/products/${product.handle}`}>{product.title}</Link>
           </h3>
-          <p className="text-[13px] text-stone-deep">
-            {formatPKR(product.price)}
+          <p className="text-[13px]">
+            <span className={onSale ? "text-sale" : "text-stone-deep"}>{formatPKR(product.price)}</span>
             {price.compare && price.compare > product.price ? (
-              <s className="ml-2">{formatPKR(price.compare)}</s>
+              <s className="ml-2 text-stone-deep">{formatPKR(price.compare)}</s>
             ) : null}
           </p>
         </div>

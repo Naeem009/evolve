@@ -9,7 +9,7 @@ import type { Audience } from "@/lib/types";
 type Params = Promise<{ audience: string }>;
 type Search = Promise<Record<string, string | string[] | undefined>>;
 
-const allowed: Audience[] = ["women", "men", "girls", "unisex"];
+const allowed: Audience[] = ["women", "men", "unisex"];
 
 export function generateStaticParams() {
   return allowed.map((audience) => ({ audience }));

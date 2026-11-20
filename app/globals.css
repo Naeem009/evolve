@@ -9,6 +9,7 @@
   --accent: #b08d57;
   --success: #2f6b4f;
   --danger: #a63d3d;
+  --sale: #8f2d2d;
   --background: var(--bone);
   --foreground: var(--ink);
 }
@@ -22,6 +23,7 @@
   --color-accent: var(--accent);
   --color-success: var(--success);
   --color-danger: var(--danger);
+  --color-sale: var(--sale);
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --font-sans: var(--font-manrope), "Segoe UI", sans-serif;

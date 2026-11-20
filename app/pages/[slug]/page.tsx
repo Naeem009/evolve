@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import { Suspense } from "react";
 import { Document } from "@/components/document";
 import { ContactForm } from "@/components/forms";
 import { JsonLd } from "@/components/json-ld";
@@ -20,7 +21,15 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   return pageMeta(page.title, page.description, `/pages/${page.slug}`);
 }
 
-export default async function Page({ params }: { params: Params }) {
+export default function Page({ params }: { params: Params }) {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-3xl px-4 py-16 text-sm text-stone-deep">Loading the page…</div>}>
+      <Info params={params} />
+    </Suspense>
+  );
+}
+
+async function Info({ params }: { params: Params }) {
   const { slug } = await params;
   const page = getInfoPage(slug);
   if (!page) notFound();
@@ -36,14 +45,6 @@ export default async function Page({ params }: { params: Params }) {
           <div>
             <h2 className="font-serif text-3xl">Adults, inches</h2>
             <SizeTable kind="adult" unit="in" />
-          </div>
-          <div>
-            <h2 className="font-serif text-3xl">Girls 10+, centimetres</h2>
-            <SizeTable kind="girls" unit="cm" />
-          </div>
-          <div>
-            <h2 className="font-serif text-3xl">Girls 10+, inches</h2>
-            <SizeTable kind="girls" unit="in" />
           </div>
         </div>
       ) : null}

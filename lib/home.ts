@@ -15,7 +15,7 @@ export const heroSlides: Slide[] = [
   {
     eyebrow: "The Co-ord Edit",
     title: "Cut from the same cloth.",
-    lede: "Shirt and trouser, considered together. For women, men and girls 10+.",
+    lede: "Shirt and trouser, considered together. For women and men.",
     cta: "Shop co-ord sets",
     href: "/collections/co-ord-sets",
     image: crop("photo-1469334031218-e382a71b716b"),
@@ -83,11 +83,5 @@ export const audienceTiles = [
     title: "Men",
     image: crop("photo-1617137968427-85924c800a22"),
     alt: "Men's dark layered clothing",
-  },
-  {
-    handle: "girls",
-    title: "Girls (10+)",
-    image: crop("photo-1489987707025-afc232f7ea0f"),
-    alt: "Garments on a rail, modest neutrals for the girls line",
   },
 ];

@@ -2,7 +2,7 @@ export const site = {
   name: "EVOLVE",
   tagline: "Evolve Your Style",
   description:
-    "EVOLVE is a premium unisex clothing house in Pakistan. Co-ord sets, tracksuits, hoodies, sweatshirts and tops for women, men and girls 10+.",
+    "EVOLVE is a premium unisex clothing house in Pakistan. Co-ord sets, tracksuits, hoodies, sweatshirts and tops for women and men.",
   url: process.env.NEXT_PUBLIC_SITE_URL || "http://localhost:3000",
   whatsapp: (process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "923001234567").replace(
     /\D/g,

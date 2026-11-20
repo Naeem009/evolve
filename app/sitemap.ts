@@ -9,7 +9,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     "/search",
     "/track-order",
     ...collectionMeta.map((collection) => `/collections/${collection.handle}`),
-    ...["women", "men", "girls", "unisex"].map((audience) => `/shop/${audience}`),
+    ...["women", "men", "unisex"].map((audience) => `/shop/${audience}`),
     ...products.map((product) => `/products/${product.handle}`),
     ...policies.map((policy) => `/policies/${policy.slug}`),
     ...infoPages.map((page) => `/pages/${page.slug}`),

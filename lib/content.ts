@@ -268,14 +268,13 @@ export const infoPages: DocPage[] = [
   {
     slug: "about",
     title: "About",
-    description: "EVOLVE is a premium unisex clothing house for women, men and girls 10+ in Pakistan.",
+    description: "EVOLVE is a premium unisex clothing house for women and men in Pakistan.",
     lede: "EVOLVE makes clothing for people who want to look considered without being costumed.",
     sections: [
       {
         heading: "The house",
         paragraphs: [
-          "We design co-ord sets, tracksuits, hoodies, sweatshirts and tops for women, men and girls aged 10 and over. The cloth is heavy enough to feel made, the colours stay in a warm neutral range, and the cuts are modest.",
-          "The girls’ line uses the same ideas as the adult line, with age-appropriate lengths and no children’s styling. We do not use photographs of minors.",
+          "We design co-ord sets, tracksuits, hoodies, sweatshirts and tops for women and men. The cloth is heavy enough to feel made, the colours stay in a warm neutral range, and the cuts are modest.",
         ],
       },
       {
@@ -304,13 +303,13 @@ export const infoPages: DocPage[] = [
   {
     slug: "size-guide",
     title: "Size Guide",
-    description: "Adult and girls 10+ size charts for EVOLVE, in centimetres and inches.",
+    description: "Adult size charts for EVOLVE, in centimetres and inches.",
     lede: "Measure over light clothing, with the tape level. If you are between sizes, take the larger one.",
     sections: [
       {
         heading: "How to measure",
         paragraphs: [
-          "Chest: around the fullest part, tape level. Waist: around the natural waist. Hip: around the fullest part. For the girls’ line, height is a useful check alongside chest.",
+          "Chest: around the fullest part, tape level. Waist: around the natural waist. Hip: around the fullest part.",
           "Unisex pieces follow the adult chart. Women who want a closer fit often take one size down. The chart is a guide, not a guarantee. Each product page notes the fit.",
         ],
       },
@@ -319,7 +318,7 @@ export const infoPages: DocPage[] = [
   {
     slug: "faq",
     title: "FAQ",
-    description: "Answers on delivery, Cash on Delivery, exchanges, sizing and the girls line.",
+    description: "Answers on delivery, Cash on Delivery, exchanges and sizing.",
     lede: "Short answers to the questions we hear most. If yours is not here, send it on WhatsApp.",
     sections: [],
   },
@@ -338,10 +337,6 @@ export const faqs: { question: string; answer: string }[] = [
   {
     question: "Can I exchange a size?",
     answer: `Yes, within ${site.exchangeWindowDays} days, if the piece is unworn and the tags are on. Start the request from Track Order or WhatsApp.`,
-  },
-  {
-    question: "How do girls’ sizes work?",
-    answer: "The girls’ line is for ages 10 and over, in 10Y, 12Y, 14Y and 16Y. Use the girls’ chart on the size guide. We do not make sizes for younger children.",
   },
   {
     question: "Which payments can I use?",

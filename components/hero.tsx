@@ -26,7 +26,8 @@ export function Hero({ slides }: { slides: Slide[] }) {
           src={item.image}
           alt={itemIndex === index ? item.alt : ""}
           fill
-          priority={itemIndex === 0}
+          loading={itemIndex === 0 ? "eager" : "lazy"}
+          fetchPriority={itemIndex === 0 ? "high" : "low"}
           sizes="100vw"
           className={`object-cover transition duration-700 ${itemIndex === index ? "opacity-100" : "opacity-0"}`}
         />

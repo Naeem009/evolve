@@ -8,7 +8,6 @@ const shop = [
   { href: "/collections/new-arrivals", label: "New arrivals" },
   { href: "/shop/women", label: "Women" },
   { href: "/shop/men", label: "Men" },
-  { href: "/shop/girls", label: "Girls (10+)" },
   { href: "/collections/sale", label: "Sale" },
 ];
 
@@ -27,7 +26,7 @@ export function Footer() {
         <div className="lg:col-span-4">
           <Image src="/brand/logo.jpg" alt="EVOLVE — Evolve Your Style" width={220} height={120} className="h-auto w-44 bg-bone" />
           <p className="mt-4 max-w-sm text-sm text-stone-deep">
-            A clothing house for women, men and girls 10+. Co-ord sets, tracksuits, hoodies, sweatshirts and tops.
+            A clothing house for women and men. Co-ord sets, tracksuits, hoodies, sweatshirts and tops.
           </p>
         </div>
         <div className="lg:col-span-2">
@@ -35,7 +34,7 @@ export function Footer() {
           <ul className="mt-4 space-y-2">
             {shop.map((link) => (
               <li key={link.href}>
-                <Link href={link.href} className="text-sm text-stone-deep hover:text-ink">
+                <Link href={link.href} className={`text-sm hover:text-ink ${link.href === "/collections/sale" ? "text-sale" : "text-stone-deep"}`}>
                   {link.label}
                 </Link>
               </li>

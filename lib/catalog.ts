@@ -8,7 +8,6 @@ import type {
 } from "./types";
 
 const ADULT = ["XS", "S", "M", "L", "XL", "XXL"] as const;
-const GIRLS = ["10Y", "12Y", "14Y", "16Y"] as const;
 
 const sand = { name: "Sand", hex: "#CDBBA4", code: "SND" };
 const ink = { name: "Ink", hex: "#1C1C1C", code: "INK" };
@@ -418,107 +417,6 @@ export const products: Product[] = [
     reviews: [review("form-top", "r12", "Daniyal P.", 4, "Holds its shape after several washes. I bought a second in ivory.")],
   }),
   product({
-    handle: "petite-nova-coord",
-    code: "COD-004",
-    title: "Petite Nova Co-ord Set",
-    category: "co-ord-sets",
-    audience: "girls",
-    price: 6990,
-    fabric: "French terry",
-    care: terryCare,
-    colors: [sand, blush],
-    sizes: GIRLS,
-    badges: ["new"],
-    sales30d: 18,
-    createdAt: "2026-10-30",
-    description:
-      "The Nova co-ord, cut for girls aged 10 and over. Modest lengths, a soft terry, and the same sand palette as the women's line.",
-    details: ["Shirt and straight trouser", "French terry, 260 gsm", "Full coverage", "Elasticated waist"],
-    fitNotes: "Sized 10Y to 16Y. Use the girls chart. When in doubt, choose the larger size.",
-    modelInfo: "Cut for ages 10 and over. No child model is shown.",
-    images: [
-      photo("photo-1489987707025-afc232f7ea0f", "Neutral co-ord pieces on a rail"),
-      photo("photo-1434389677669-e08b4cac3105", "Soft neutral knit texture"),
-    ],
-    reviews: [review("petite-nova-coord", "r13", "Parent of a 12-year-old", 5, "The 12Y fit my daughter at 152 cm. The length is modest and the fabric is not thin.")],
-  }),
-  product({
-    handle: "studio-tracksuit",
-    code: "TRK-003",
-    title: "Studio Tracksuit",
-    category: "tracksuits",
-    audience: "girls",
-    price: 7490,
-    fabric: "French terry",
-    care: terryCare,
-    colors: [olive, ivory],
-    sizes: GIRLS,
-    badges: ["bestseller"],
-    sales30d: 44,
-    createdAt: "2026-09-08",
-    description:
-      "A girls' tracksuit with a full-zip jacket and a straight trouser. Quiet colours, no cartoon graphics, and room to move.",
-    details: ["Zip jacket and trouser", "French terry, 280 gsm", "Side pockets", "Rib cuffs"],
-    fitNotes: "Roomy enough for a layer underneath. Follow the girls size chart.",
-    modelInfo: "Cut for ages 10 and over. Shown as a garment, not on a child.",
-    images: [
-      photo("photo-1556905055-8f358a7a47b2", "Folded cotton separates in olive and ivory"),
-      photo("photo-1562157873-818bc0726f68", "A clean shirt and soft separates"),
-    ],
-    reviews: [
-      review("studio-tracksuit", "r14", "Parent of a 14-year-old", 5, "She wears it to school events. It looks like clothing, not a costume."),
-    ],
-  }),
-  product({
-    handle: "cloud-hoodie",
-    code: "HOD-003",
-    title: "Cloud Hoodie",
-    category: "hoodies",
-    audience: "girls",
-    price: 5490,
-    fabric: "Fleece",
-    care: fleeceCare,
-    colors: [ivory, blush],
-    sizes: GIRLS,
-    low: ["BLS-10Y"],
-    badges: [],
-    sales30d: 15,
-    createdAt: "2026-08-22",
-    description:
-      "A light-handed hoodie for cooler classrooms and weekends. The hood is modest, the hem covers the hip, and the fleece is soft on the inside.",
-    details: ["Fleece, 320 gsm", "Kangaroo pocket", "Rib cuffs", "Hip length"],
-    fitNotes: "True to the girls chart. 10Y in blush is nearly gone.",
-    modelInfo: "Cut for ages 10 and over. Shown as a garment, not on a child.",
-    images: [
-      photo("photo-1576566588028-4147f3842f27", "Folded light sweatshirts"),
-      photo("photo-1434389677669-e08b4cac3105", "Soft ivory knit"),
-    ],
-  }),
-  product({
-    handle: "daylight-top",
-    code: "TOP-003",
-    title: "Daylight Top",
-    category: "tops",
-    audience: "girls",
-    price: 3490,
-    fabric: "Cotton jersey",
-    care: "Machine wash cold. Do not bleach.",
-    colors: [ivory, sand, olive],
-    sizes: GIRLS,
-    badges: [],
-    sales30d: 21,
-    createdAt: "2026-06-20",
-    description:
-      "A long-sleeve jersey top with a high-enough neckline and a hem that stays put. Made to layer under the Studio jacket.",
-    details: ["Cotton jersey, 180 gsm", "Long sleeve", "Narrow rib neck"],
-    fitNotes: "Straight fit. Check the girls chart before you order.",
-    modelInfo: "Cut for ages 10 and over. Shown as a garment, not on a child.",
-    images: [
-      photo("photo-1523381210434-271e8be1f52b", "Plain cotton tops, folded"),
-      photo("photo-1562157873-818bc0726f68", "White shirt on a hanger"),
-    ],
-  }),
-  product({
     handle: "atelier-hoodie",
     code: "HOD-004",
     title: "Atelier Hoodie",
@@ -612,7 +510,6 @@ export const collectionMeta: { handle: string; title: string; blurb: string }[] 
 export const audiences: { handle: Audience; title: string; blurb: string }[] = [
   { handle: "women", title: "Women", blurb: "Co-ords, tracksuits and layers with a clean line." },
   { handle: "men", title: "Men", blurb: "Straight fits, deep colours, no excess." },
-  { handle: "girls", title: "Girls (10+)", blurb: "Modest cuts for ages 10 and over, in the same cloth as the house." },
   { handle: "unisex", title: "Unisex", blurb: "One block, shared across the wardrobe." },
 ];
 

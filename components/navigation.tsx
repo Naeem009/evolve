@@ -9,7 +9,14 @@ import { categories, collectionMeta, searchProducts } from "@/lib/catalog";
 import { formatPKR } from "@/lib/format";
 import { useShop } from "./providers";
 
-const links = [
+type NavLink = {
+  label: string;
+  href: string;
+  items?: { label: string; href: string }[];
+  highlight?: boolean;
+};
+
+const links: NavLink[] = [
   { label: "New Arrivals", href: "/collections/new-arrivals" },
   {
     label: "Women",
@@ -28,22 +35,14 @@ const links = [
     })),
   },
   {
-    label: "Girls (10+)",
-    href: "/shop/girls",
-    items: categories.map((item) => ({
-      label: item.title,
-      href: `/shop/girls?category=${item.handle}`,
-    })),
-  },
-  {
-    label: "Collections",
+    label: "Hot Collections",
     href: "/collections/co-ord-sets",
     items: collectionMeta.map((item) => ({
       label: item.title,
       href: `/collections/${item.handle}`,
     })),
   },
-  { label: "Sale", href: "/collections/sale" },
+  { label: "Sale", href: "/collections/sale", highlight: true },
   { label: "About", href: "/pages/about" },
 ];
 
@@ -108,7 +107,7 @@ export function Navigation() {
                 <div key={link.label} className="group relative">
                   <Link
                     href={link.href}
-                    className="inline-flex min-h-11 items-center text-[12px] uppercase tracking-[0.16em]"
+                    className={`inline-flex min-h-11 items-center text-[12px] uppercase tracking-[0.16em] ${link.highlight ? "text-sale" : ""}`}
                   >
                     {link.label}
                   </Link>
@@ -118,7 +117,7 @@ export function Navigation() {
                         <Link
                           key={item.href}
                           href={item.href}
-                          className="block py-2 text-[13px] tracking-wide text-stone-deep hover:text-ink"
+                          className={`block py-2 text-[13px] tracking-wide hover:text-ink ${item.href.endsWith("/sale") ? "text-sale" : "text-stone-deep"}`}
                         >
                           {item.label}
                         </Link>
@@ -223,7 +222,7 @@ export function Navigation() {
             {links.map((link) =>
               link.items ? (
                 <details key={link.label} className="border-b border-sand">
-                  <summary className="flex min-h-12 items-center text-[14px] uppercase tracking-[0.16em]">
+                  <summary className={`flex min-h-12 items-center text-[14px] uppercase tracking-[0.16em] ${link.highlight ? "text-sale" : ""}`}>
                     {link.label}
                   </summary>
                   <div className="pb-3">
@@ -231,7 +230,7 @@ export function Navigation() {
                       Shop all
                     </Link>
                     {link.items.map((item) => (
-                      <Link key={item.href} href={item.href} className="block py-2 text-sm" onClick={() => setMenuOpen(false)}>
+                      <Link key={item.href} href={item.href} className={`block py-2 text-sm ${item.href.endsWith("/sale") ? "text-sale" : ""}`} onClick={() => setMenuOpen(false)}>
                         {item.label}
                       </Link>
                     ))}
@@ -241,7 +240,7 @@ export function Navigation() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className="flex min-h-12 items-center border-b border-sand text-[14px] uppercase tracking-[0.16em]"
+                  className={`flex min-h-12 items-center border-b border-sand text-[14px] uppercase tracking-[0.16em] ${link.highlight ? "text-sale" : ""}`}
                   onClick={() => setMenuOpen(false)}
                 >
                   {link.label}

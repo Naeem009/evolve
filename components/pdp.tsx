@@ -19,7 +19,7 @@ export function Gallery({ product }: { product: Product }) {
   return (
     <div>
       <div className="relative aspect-[4/5] bg-sand">
-        <Image src={image.src} alt={image.alt} fill priority sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+        <Image src={image.src} alt={image.alt} fill loading="eager" fetchPriority="high" sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
       </div>
       {product.images.length > 1 ? (
         <div className="mt-3 flex gap-2 overflow-x-auto">
@@ -88,12 +88,12 @@ export function PurchasePanel({
       <div className="flex items-start justify-between gap-4">
         <div>
           <h1 className="font-serif text-4xl font-medium md:text-5xl">{product.title}</h1>
-          <p className="mt-3 text-lg">
+          <p className={`mt-3 text-lg ${off || product.badges.includes("sale") ? "text-sale" : ""}`}>
             {formatPKR(product.price)}
             {product.compareAtPrice && product.compareAtPrice > product.price ? (
               <s className="ml-2 text-base text-stone-deep">{formatPKR(product.compareAtPrice)}</s>
             ) : null}
-            {off ? <span className="ml-2 text-sm text-stone-deep">{off}% off</span> : null}
+            {off ? <span className="ml-2 text-sm">{off}% off</span> : null}
           </p>
         </div>
         <WishlistButton handle={product.handle} className="inline-flex h-11 w-11 shrink-0 items-center justify-center border border-sand" />

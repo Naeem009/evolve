@@ -32,7 +32,15 @@ export async function generateMetadata({ params }: { params: Params }): Promise<
   };
 }
 
-export default async function Page({ params }: { params: Params }) {
+export default function Page({ params }: { params: Params }) {
+  return (
+    <Suspense fallback={<div className="mx-auto max-w-[1440px] px-4 py-16 text-sm text-stone-deep">Loading the piece…</div>}>
+      <Piece params={params} />
+    </Suspense>
+  );
+}
+
+async function Piece({ params }: { params: Params }) {
   const { handle } = await params;
   const product = getProduct(handle);
   if (!product) notFound();

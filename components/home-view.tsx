@@ -88,7 +88,7 @@ export function HomeView() {
 
       <section className="mx-auto max-w-[1440px] px-4 pb-16 md:px-8">
         <h2 className="mb-8 font-serif text-4xl md:text-5xl">Shop by audience</h2>
-        <div className="grid gap-3 md:grid-cols-3">
+        <div className="grid gap-3 md:grid-cols-2">
           {audienceTiles.map((tile) => (
             <Link key={tile.handle} href={`/shop/${tile.handle}`} className="relative min-h-80 bg-sand">
               <Image src={tile.image} alt={tile.alt} fill sizes="(max-width: 768px) 100vw, 33vw" className="object-cover" />
@@ -112,7 +112,7 @@ export function HomeView() {
           <p className={eyebrow}>The house</p>
           <h2 className="mt-3 font-serif text-5xl">Evolve your style.</h2>
           <p className="mt-4 max-w-md text-stone-deep">
-            EVOLVE designs clothing that can be worn hard and still look considered. The same cloth runs through the women’s, men’s and girls’ lines. Girls’ pieces are cut for ages 10 and over, with modest lengths and no children’s styling.
+            EVOLVE designs clothing that can be worn hard and still look considered. The same cloth runs through the women’s and men’s lines, in cuts that stay modest and colours that stay quiet.
           </p>
           <Link href="/pages/about" className={`${btnGhost} mt-8`}>
             Read the story
