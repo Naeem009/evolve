@@ -131,7 +131,7 @@ export function Navigation() {
                   href={link.href}
                   className="inline-flex min-h-11 items-center text-[12px] uppercase tracking-[0.16em]"
                 >
-                  {link.label}
+                  {link.highlight ? <span className="bg-sale px-3 py-1 text-bone">{link.label}</span> : link.label}
                 </Link>
               ),
             )}
@@ -240,10 +240,10 @@ export function Navigation() {
                 <Link
                   key={link.label}
                   href={link.href}
-                  className={`flex min-h-12 items-center border-b border-sand text-[14px] uppercase tracking-[0.16em] ${link.highlight ? "text-sale" : ""}`}
+                  className="flex min-h-12 items-center border-b border-sand text-[14px] uppercase tracking-[0.16em]"
                   onClick={() => setMenuOpen(false)}
                 >
-                  {link.label}
+                  {link.highlight ? <span className="bg-sale px-3 py-1 text-bone">{link.label}</span> : link.label}
                 </Link>
               ),
             )}
