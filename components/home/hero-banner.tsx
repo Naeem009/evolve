@@ -78,7 +78,7 @@ export function HeroBanner({
     height === "hero"
       ? "min-h-[78svh] lg:min-h-[min(88vh,860px)]"
       : height === "lg"
-        ? "min-h-[86svh] w-full lg:min-h-[min(90vh,980px)]"
+        ? "min-h-[86svh] w-full lg:min-h-[min(90vh,1020px)]"
         : "min-h-[min(70vh,640px)]";
   const align = slide.textAlign === "center" ? "items-center text-center" : "items-start text-left";
 
