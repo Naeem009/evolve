@@ -17,21 +17,21 @@ export function Gallery({ product }: { product: Product }) {
   const image = product.images[index] ?? product.images[0];
   if (!image) return null;
   return (
-    <div>
-      <div className="relative aspect-[4/5] bg-sand">
-        <Image src={image.src} alt={image.alt} fill loading="eager" fetchPriority="high" sizes="(max-width: 1024px) 100vw, 50vw" className="object-cover" />
+    <div className="w-full">
+      <div className="relative h-[78svh] w-full bg-sand lg:h-[min(88vh,960px)]">
+        <Image src={image.src} alt={image.alt} fill loading="eager" fetchPriority="high" sizes="100vw" className="object-cover" />
       </div>
       {product.images.length > 1 ? (
-        <div className="mt-3 flex gap-2 overflow-x-auto">
+        <div className="flex w-full gap-0 overflow-x-auto">
           {product.images.map((item, itemIndex) => (
             <button
               key={item.src}
               type="button"
               aria-label={`Show image ${itemIndex + 1}`}
-              className={`relative h-20 w-16 shrink-0 border ${itemIndex === index ? "border-ink" : "border-transparent"}`}
+              className={`relative h-28 w-24 shrink-0 border-0 sm:h-36 sm:w-28 ${itemIndex === index ? "opacity-100" : "opacity-70"}`}
               onClick={() => setIndex(itemIndex)}
             >
-              <Image src={item.src} alt="" fill className="object-cover" sizes="64px" />
+              <Image src={item.src} alt="" fill className="object-cover" sizes="112px" />
             </button>
           ))}
         </div>

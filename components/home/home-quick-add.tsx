@@ -82,13 +82,13 @@ export function HomeQuickAdd({ product, listName }: { product: CardModel; listNa
 
   return (
     <>
-      <div className="mt-3 hidden md:block md:max-h-0 md:overflow-hidden md:opacity-0 md:transition-all md:duration-300 md:group-hover:max-h-40 md:group-hover:opacity-100 md:group-focus-within:max-h-40 md:group-focus-within:opacity-100">
+      <div className="hidden bg-bone p-2 md:block md:max-h-0 md:overflow-hidden md:p-0 md:opacity-0 md:transition-all md:duration-300 md:group-hover:max-h-40 md:group-hover:p-2 md:group-hover:opacity-100 md:group-focus-within:max-h-40 md:group-focus-within:p-2 md:group-focus-within:opacity-100">
         {colors}
         {sizes}
       </div>
       <button
         type="button"
-        className="mt-3 inline-flex min-h-11 items-center text-[11px] uppercase tracking-[0.16em] text-stone-deep md:hidden"
+        className="inline-flex min-h-11 items-center bg-bone px-3 text-[11px] uppercase tracking-[0.16em] text-ink md:hidden"
         aria-haspopup="dialog"
         aria-expanded={open}
         onClick={() => setOpen(true)}

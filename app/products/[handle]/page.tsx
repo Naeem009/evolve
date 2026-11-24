@@ -4,7 +4,7 @@ import { notFound } from "next/navigation";
 import { Suspense } from "react";
 import { JsonLd } from "@/components/json-ld";
 import { Gallery, PurchasePanel } from "@/components/pdp";
-import { ProductCard } from "@/components/product-card";
+import { ProductGrid } from "@/components/product-card";
 import { ReviewForm } from "@/components/forms";
 import { categories, getProduct, products, relatedProducts, totalStock } from "@/lib/catalog";
 import { site } from "@/lib/site";
@@ -51,8 +51,8 @@ async function Piece({ params }: { params: Params }) {
       : undefined;
 
   return (
-    <article className="mx-auto max-w-[1440px] px-4 py-8 md:px-8 md:py-12">
-      <nav className="mb-6 text-[12px] uppercase tracking-[0.14em] text-stone-deep" aria-label="Breadcrumb">
+    <article>
+      <nav className="px-4 py-3 text-[12px] uppercase tracking-[0.14em] text-stone-deep md:px-8" aria-label="Breadcrumb">
         <Link href="/">Home</Link>
         <span className="px-2">/</span>
         <Link href={`/collections/${product.category}`}>{categories.find((item) => item.handle === product.category)?.title}</Link>
@@ -87,8 +87,8 @@ async function Piece({ params }: { params: Params }) {
           },
         }}
       />
-      <div className="grid gap-10 lg:grid-cols-2">
-        <Gallery product={product} />
+      <Gallery product={product} />
+      <div className="mx-auto max-w-[1440px] px-4 py-6 md:px-8">
         <div>
           <Suspense fallback={<div className="h-64 animate-pulse bg-sand/70" />}>
             <Stocked handle={product.handle} />
@@ -123,7 +123,7 @@ async function Piece({ params }: { params: Params }) {
         </div>
       </div>
 
-      <section className="mt-16 border-t border-sand pt-10">
+      <section className="mx-auto mt-10 max-w-[1440px] border-t border-sand px-4 pt-8 md:px-8">
         <h2 className="font-serif text-4xl">Reviews</h2>
         {product.reviews.length === 0 ? <p className="mt-3 text-sm text-stone-deep">No published reviews yet.</p> : null}
         <ul className="mt-6 space-y-6">
@@ -140,14 +140,9 @@ async function Piece({ params }: { params: Params }) {
         </Suspense>
         <ReviewForm handle={product.handle} />
       </section>
-
-      <section className="mt-16">
-        <h2 className="mb-8 font-serif text-4xl">You may also like</h2>
-        <div className="grid grid-cols-2 gap-x-3 gap-y-10 lg:grid-cols-4">
-          {related.map((item) => (
-            <ProductCard key={item.handle} product={item} />
-          ))}
-        </div>
+      <section className="mt-8">
+        <h2 className="mb-2 px-4 font-serif text-4xl md:px-8">You may also like</h2>
+        <ProductGrid products={related} />
       </section>
     </article>
   );

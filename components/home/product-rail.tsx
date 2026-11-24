@@ -32,7 +32,7 @@ export function ProductRail({
   }
 
   const heading = (
-    <div className="mb-6 flex items-end justify-between gap-4">
+    <div className="mb-2 flex items-end justify-between gap-4 px-4 md:px-8">
       <h2 className="text-[12px] uppercase tracking-[0.18em] md:text-[14px]">{section.title}</h2>
       <div className="flex items-center gap-2">
         {section.layout === "carousel" ? (
@@ -54,31 +54,29 @@ export function ProductRail({
 
   if (section.layout === "carousel") {
     return (
-      <section className="bg-sand/50 py-16 lg:py-24">
-        <div className="mx-auto max-w-[1440px] px-4 md:px-6 lg:px-12">
-          {heading}
-          <div
-            ref={scroller}
-            className="flex snap-x snap-mandatory gap-4 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
-            aria-label={section.title}
-          >
-            {products.map((product) => (
-              <div key={product.handle} className="w-[76%] shrink-0 snap-start md:w-[calc(50%-8px)] lg:w-[calc(25%-12px)]">
-                <HomeProductCard product={product} listName={section.listName} sizes="(max-width: 768px) 76vw, 25vw" />
-              </div>
-            ))}
-          </div>
+      <section className="bg-sand/50 py-4">
+        {heading}
+        <div
+          ref={scroller}
+          className="flex snap-x snap-mandatory gap-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+          aria-label={section.title}
+        >
+          {products.map((product) => (
+            <div key={product.handle} className="w-full shrink-0 snap-start md:w-1/2">
+              <HomeProductCard product={product} listName={section.listName} sizes="(max-width: 768px) 100vw, 50vw" />
+            </div>
+          ))}
         </div>
       </section>
     );
   }
 
   return (
-    <section className="mx-auto max-w-[1440px] px-4 py-16 md:px-6 lg:px-12 lg:py-24">
+    <section className="py-4">
       {heading}
-      <div className="grid grid-cols-2 gap-4 lg:grid-cols-4 lg:gap-6">
+      <div className="grid w-full grid-cols-2 gap-0 lg:grid-cols-3">
         {products.map((product) => (
-          <HomeProductCard key={product.handle} product={product} listName={section.listName} sizes="(max-width: 1024px) 50vw, 25vw" />
+          <HomeProductCard key={product.handle} product={product} listName={section.listName} sizes="(max-width: 1024px) 50vw, 34vw" />
         ))}
       </div>
     </section>

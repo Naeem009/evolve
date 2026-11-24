@@ -27,17 +27,17 @@ export function QuickAdd({ product }: { product: Product }) {
   if (product.variants.every((variant) => variant.stock <= 0)) return null;
 
   return (
-    <div className="mt-3">
+    <div className="absolute right-2 bottom-2 z-10">
       <button
         type="button"
-        className="min-h-11 text-[11px] uppercase tracking-[0.16em] text-stone-deep"
+        className="inline-flex min-h-11 items-center bg-bone px-3 text-[11px] uppercase tracking-[0.16em] text-ink"
         aria-expanded={open}
         onClick={() => setOpen((value) => !value)}
       >
         {open ? "Close" : "Quick add"}
       </button>
       {open ? (
-        <div className="mt-2">
+        <div className="absolute right-0 bottom-12 w-max max-w-[70vw] bg-bone p-2">
           {colors.length > 1 ? (
             <div className="mb-2 flex gap-2">
               {colors.map(([name, hex]) => (

@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { Suspense } from "react";
 import { AddressForm, SignInForm, SignOutButton } from "@/components/account-forms";
-import { ProductCard } from "@/components/product-card";
+import { ProductGrid } from "@/components/product-card";
 import { formatPhone, formatPKR } from "@/lib/format";
 import { getProduct } from "@/lib/catalog";
 import { pageMeta } from "@/lib/seo";
@@ -32,6 +32,7 @@ async function Account() {
   const orders = (await readOrders()).filter((order) => order.customer.phone === session.phone);
   const wishlist = (await getWishlist()).map((handle) => getProduct(handle)).filter((product) => product !== undefined);
   return (
+    <>
     <div className="mx-auto max-w-[1440px] px-4 py-12 md:px-8">
       <div className="flex flex-wrap items-end justify-between gap-4">
         <div>
@@ -69,14 +70,11 @@ async function Account() {
         <AddressForm />
       </section>
       <section id="wishlist" className="mt-12">
-        <h2 className="mb-6 font-serif text-4xl">Wishlist</h2>
-        {wishlist.length === 0 ? <p className="text-sm text-stone-deep">Save a piece from its card or product page.</p> : null}
-        <div className="grid grid-cols-2 gap-x-3 gap-y-10 lg:grid-cols-4">
-          {wishlist.map((product) => (
-            <ProductCard key={product.handle} product={product} />
-          ))}
-        </div>
+        <h2 className="font-serif text-4xl">Wishlist</h2>
+        {wishlist.length === 0 ? <p className="mt-3 text-sm text-stone-deep">Save a piece from its card or product page.</p> : null}
       </section>
     </div>
+    {wishlist.length > 0 ? <ProductGrid products={wishlist} /> : null}
+    </>
   );
 }

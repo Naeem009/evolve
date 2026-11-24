@@ -32,18 +32,19 @@ export function Listing({
   const shown = facetOptions(universe);
 
   return (
-    <div className="mx-auto max-w-[1440px] px-4 py-10 md:px-8 md:py-14">
+    <div className="pt-6">
+      <div className="mx-auto max-w-[1440px] px-4 md:px-8">
       <span className="mb-4 block h-px w-10 bg-accent" />
       <h1 className="font-serif text-5xl font-medium md:text-6xl">{title}</h1>
       <p className="mt-3 max-w-xl text-stone-deep">{lede}</p>
-      <div className="mt-10 lg:grid lg:grid-cols-[16rem_1fr] lg:gap-12">
-        <form id="catalog-filters" action={action} method="get" className="mb-8 lg:mb-0">
+      <div className="mt-6">
+        <form id="catalog-filters" action={action} method="get" className="mb-4">
           {query.q ? <input type="hidden" name="q" value={query.q} /> : null}
           <details className="border-b border-sand lg:border-0">
             <summary className="filters-summary min-h-11 py-3 text-[12px] uppercase tracking-[0.16em]">
               Filter
             </summary>
-            <div className="filters-panel space-y-6 py-4 lg:sticky lg:top-28">
+            <div className="filters-panel space-y-6 py-4">
               {!hideAudience ? (
                 <fieldset>
                   <legend className={labelCls}>Audience</legend>
@@ -123,14 +124,15 @@ export function Listing({
             </div>
           </details>
         </form>
-        <div>
-          <div className="mb-6 flex items-center justify-between gap-4">
+      </div>
+      </div>
+      <div>
+          <div className="mb-2 flex items-center justify-between gap-4 px-4 md:px-8">
             <p className="text-sm text-stone-deep">{products.length} pieces</p>
             <SortSelect value={query.sort || "newest"} />
           </div>
           <ProductGrid products={products} />
         </div>
-      </div>
     </div>
   );
 }

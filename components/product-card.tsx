@@ -14,19 +14,18 @@ const badgeLabel = {
 
 export function ProductCard({ product }: { product: Product }) {
   const price = priceLabel(product);
-  const onSale = product.badges.includes("sale") || Boolean(price.compare && price.compare > product.price);
   const soldOut = totalStock(product) <= 0;
   const low = isLowStock(product);
   const second = product.images[1];
   return (
     <article className="group">
       <div className="relative">
-        <Link href={`/products/${product.handle}`} className="relative block aspect-[4/5] overflow-hidden bg-sand">
+        <Link href={`/products/${product.handle}`} className="relative block aspect-[3/4] overflow-hidden bg-sand">
           <Image
             src={product.images[0]?.src ?? ""}
             alt={product.images[0]?.alt ?? product.title}
             fill
-            sizes="(max-width: 768px) 50vw, 25vw"
+            sizes="(max-width: 1024px) 50vw, 34vw"
             className={`object-cover ${second ? "transition duration-500 group-hover:opacity-0" : ""}`}
           />
           {second ? (
@@ -34,10 +33,17 @@ export function ProductCard({ product }: { product: Product }) {
               src={second.src}
               alt=""
               fill
-              sizes="(max-width: 768px) 50vw, 25vw"
+              sizes="(max-width: 1024px) 50vw, 34vw"
               className="object-cover opacity-0 transition duration-500 group-hover:opacity-100"
             />
           ) : null}
+          <span className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-ink/55 to-transparent p-2 pr-28 text-bone">
+            <span className="block text-[12px] uppercase tracking-[0.12em]">{product.title}</span>
+            <span className="mt-1 inline-flex items-center bg-bone px-1.5 py-0.5 text-[13px] text-ink">
+              <span className={price.compare && price.compare > product.price ? "text-sale" : ""}>{formatPKR(product.price)}</span>
+              {price.compare && price.compare > product.price ? <s className="ml-2 text-stone-deep">{formatPKR(price.compare)}</s> : null}
+            </span>
+          </span>
         </Link>
         <div className="absolute top-3 left-3 flex flex-col gap-1">
           {soldOut ? <span className="bg-bone px-2 py-1 text-[10px] uppercase tracking-[0.14em]">Sold out</span> : null}
@@ -49,21 +55,11 @@ export function ProductCard({ product }: { product: Product }) {
           {low && !soldOut ? <span className="bg-bone px-2 py-1 text-[10px] uppercase tracking-[0.14em]">Low stock</span> : null}
         </div>
         <WishlistButton handle={product.handle} />
+        <QuickAdd product={product} />
       </div>
-      <div className="mt-3 flex items-start justify-between gap-3">
-        <div>
-          <h3 className="text-sm">
-            <Link href={`/products/${product.handle}`}>{product.title}</Link>
-          </h3>
-          <p className="text-[13px]">
-            <span className={onSale ? "text-sale" : "text-stone-deep"}>{formatPKR(product.price)}</span>
-            {price.compare && price.compare > product.price ? (
-              <s className="ml-2 text-stone-deep">{formatPKR(price.compare)}</s>
-            ) : null}
-          </p>
-        </div>
-      </div>
-      <QuickAdd product={product} />
+      <h3 className="sr-only">
+        <Link href={`/products/${product.handle}`}>{product.title}</Link>
+      </h3>
     </article>
   );
 }
@@ -81,7 +77,7 @@ export function ProductGrid({ products }: { products: Product[] }) {
     );
   }
   return (
-    <div className="grid grid-cols-2 gap-x-3 gap-y-10 md:grid-cols-3 xl:grid-cols-4">
+    <div className="grid w-full grid-cols-2 gap-0 lg:grid-cols-3">
       {products.map((product) => (
         <ProductCard key={product.handle} product={product} />
       ))}
