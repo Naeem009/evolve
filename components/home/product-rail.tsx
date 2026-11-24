@@ -58,11 +58,11 @@ export function ProductRail({
         {heading}
         <div
           ref={scroller}
-          className="flex snap-x snap-mandatory gap-0 overflow-x-auto [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+            className="flex snap-x snap-mandatory gap-px overflow-x-auto bg-sand [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
           aria-label={section.title}
         >
           {products.map((product) => (
-            <div key={product.handle} className="w-full shrink-0 snap-start md:w-1/2">
+              <div key={product.handle} className="w-full shrink-0 snap-start bg-bone md:w-[calc(50%-0.5px)]">
               <HomeProductCard product={product} listName={section.listName} sizes="(max-width: 768px) 100vw, 50vw" />
             </div>
           ))}
@@ -74,7 +74,7 @@ export function ProductRail({
   return (
     <section className="py-4">
       {heading}
-      <div className="grid w-full grid-cols-2 gap-0 lg:grid-cols-3">
+      <div className="grid w-full grid-cols-2 gap-px bg-sand lg:grid-cols-3">
         {products.map((product) => (
           <HomeProductCard key={product.handle} product={product} listName={section.listName} sizes="(max-width: 1024px) 50vw, 34vw" />
         ))}

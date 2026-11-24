@@ -75,7 +75,7 @@ function renderSection(section: HomePage["sections"][number], turnstileSiteKey: 
     case "statement":
       return <Statement section={section} />;
     case "campaignBanner":
-      return <HeroBanner slides={[section.slide]} height={section.height === "lg" ? "hero" : "md"} heading="h2" />;
+      return <HeroBanner slides={[section.slide]} height={section.height} heading="h2" videoSrc={section.video} />;
     case "splitBanners":
       return <SplitBanners section={section} />;
     case "highlights":

@@ -123,7 +123,8 @@ const draftSections = [
     type: "campaignBanner" as const,
     order: 5,
     enabled: true,
-    height: "md" as const,
+    height: "lg" as const,
+    video: "/video/winter-garments.mp4",
     slide: {
       eyebrow: "The season",
       title: "Winter essentials.",

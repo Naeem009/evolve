@@ -47,6 +47,7 @@ export const homeSectionSchema = z.discriminatedUnion("type", [
     type: z.literal("campaignBanner"),
     slide: heroSlideSchema,
     height: z.enum(["md", "lg"]),
+    video: z.string().min(1).optional(),
     ...flags,
   }),
   z.object({

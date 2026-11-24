@@ -41,16 +41,23 @@ export function HeroBanner({
   slides,
   height,
   heading = "h1",
+  videoSrc,
 }: {
   slides: HeroSlide[];
-  height: "hero" | "md";
+  height: "hero" | "md" | "lg";
   heading?: "h1" | "h2";
+  videoSrc?: string;
 }) {
   const [index, setIndex] = useState(0);
   const [paused, setPaused] = useState(false);
+  const [playVideo, setPlayVideo] = useState(false);
   const startX = useRef(0);
   const count = slides.length;
   const slide = slides[index] ?? slides[0];
+
+  useEffect(() => {
+    setPlayVideo(Boolean(videoSrc) && !window.matchMedia("(prefers-reduced-motion: reduce)").matches);
+  }, [videoSrc]);
 
   useEffect(() => {
     if (paused || count < 2) return;
@@ -67,9 +74,13 @@ export function HeroBanner({
     setIndex((current) => (current + direction + count) % count);
   }
 
-  const frame = height === "hero" ? "min-h-[78svh] lg:min-h-[min(88vh,860px)]" : "min-h-[min(70vh,640px)]";
+  const frame =
+    height === "hero"
+      ? "min-h-[78svh] lg:min-h-[min(88vh,860px)]"
+      : height === "lg"
+        ? "min-h-[86svh] w-full lg:min-h-[min(90vh,920px)]"
+        : "min-h-[min(70vh,640px)]";
   const align = slide.textAlign === "center" ? "items-center text-center" : "items-start text-left";
-  const stretch = height === "hero" ? "min-h-[78svh] lg:min-h-[min(88vh,860px)]" : "min-h-[min(70vh,640px)]";
 
   return (
     <section
@@ -96,10 +107,15 @@ export function HeroBanner({
       {slides.map((item, itemIndex) => (
         <div key={item.title} className={`absolute inset-0 motion-safe:transition-opacity motion-safe:duration-700 ${itemIndex === index ? "opacity-100" : "opacity-0"}`} aria-hidden={itemIndex !== index}>
           <ArtImage desktopUrl={item.image.desktopUrl} mobileUrl={item.image.mobileUrl} alt={itemIndex === index ? item.image.alt : ""} eager={height === "hero" && itemIndex === 0} />
+          {playVideo && videoSrc && itemIndex === index ? (
+            <video className="absolute inset-0 h-full w-full object-cover" autoPlay muted loop playsInline poster={item.image.desktopUrl}>
+              <source src={videoSrc} type="video/mp4" />
+            </video>
+          ) : null}
         </div>
       ))}
       <div className="absolute inset-0 bg-gradient-to-tr from-ink/55 via-ink/20 to-transparent" />
-      <div className={`relative z-10 mx-auto flex w-full max-w-[1440px] flex-col justify-end px-4 pt-28 pb-28 md:px-6 lg:px-12 lg:pb-16 ${stretch} ${align}`}>
+      <div className={`relative z-10 mx-auto flex w-full max-w-[1440px] flex-col justify-end px-4 pt-28 pb-28 md:px-6 lg:px-12 lg:pb-16 ${frame} ${align}`}>
         <div className="max-w-xl">
           <span className="mb-4 block h-px w-10 bg-accent" />
           {slide.eyebrow ? <p className="text-[11px] uppercase tracking-[0.22em] text-bone/80">{slide.eyebrow}</p> : null}
