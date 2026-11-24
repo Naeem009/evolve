@@ -354,11 +354,17 @@ export async function saveMessage(message: { name: string; phone: string; body: 
   });
 }
 
-export async function saveSubscriber(entry: { email?: string; phone?: string }): Promise<void> {
-  await enqueue(async () => {
+export async function saveSubscriber(entry: { email?: string; phone?: string }): Promise<"created" | "exists"> {
+  return enqueue(async () => {
     const list = await readJson<{ email?: string; phone?: string; createdAt: string }[]>(subscribersFile, []);
-    list.unshift({ ...entry, createdAt: new Date().toISOString() });
+    const email = entry.email?.toLowerCase();
+    const exists = list.some(
+      (item) => (email && item.email?.toLowerCase() === email) || (entry.phone && item.phone === entry.phone),
+    );
+    if (exists) return "exists" as const;
+    list.unshift({ ...entry, email, createdAt: new Date().toISOString() });
     await writeJson(subscribersFile, list);
+    return "created" as const;
   });
 }
 

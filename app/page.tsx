@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { HomeView } from "@/components/home-view";
+import { HomeRenderer } from "@/components/home/home-renderer";
 import { pageMeta } from "@/lib/seo";
 
 export const metadata: Metadata = {
@@ -12,5 +12,5 @@ export const metadata: Metadata = {
 };
 
 export default function HomePage() {
-  return <HomeView />;
+  return <HomeRenderer />;
 }

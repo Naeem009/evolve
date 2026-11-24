@@ -3,10 +3,12 @@
 import Image from "next/image";
 import Link from "next/link";
 import { usePathname, useRouter } from "next/navigation";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useState } from "react";
 import { Heart, Menu, Search, ShoppingBag, User, X } from "lucide-react";
 import { categories, collectionMeta, searchProducts } from "@/lib/catalog";
 import { formatPKR } from "@/lib/format";
+import { homeChrome } from "@/lib/home/content";
+import { AnnouncementBar } from "./home/announcement-bar";
 import { useShop } from "./providers";
 
 type NavLink = {
@@ -49,7 +51,7 @@ const links: NavLink[] = [
 export function HeaderFallback() {
   return (
     <div className="border-b border-sand bg-bone">
-      <div className="h-9 bg-ink" />
+      <div className="h-8 bg-ink sm:h-9" />
       <div className="mx-auto h-16 max-w-[1440px]" />
     </div>
   );
@@ -63,6 +65,16 @@ export function Navigation() {
   const [searchOpen, setSearchOpen] = useState(false);
   const [query, setQuery] = useState("");
   const [path, setPath] = useState(pathname);
+  const [scrolled, setScrolled] = useState(false);
+  const chrome = homeChrome();
+
+  useEffect(() => {
+    if (!chrome.overlayHero || pathname !== "/") return;
+    const onScroll = () => setScrolled(window.scrollY > 24);
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    return () => window.removeEventListener("scroll", onScroll);
+  }, [chrome.overlayHero, pathname]);
 
   if (path !== pathname) {
     setPath(pathname);
@@ -82,12 +94,13 @@ export function Navigation() {
     router.push(`/search?q=${encodeURIComponent(term)}`);
   }
 
+  const overHero = chrome.overlayHero && pathname === "/" && !scrolled && !menuOpen && !searchOpen;
+
   return (
     <>
-      <header className="no-print sticky top-0 z-40 border-b border-sand bg-bone/95 backdrop-blur">
-        <div className="bg-ink px-3 py-2 text-center text-[10px] uppercase leading-5 tracking-[0.12em] text-balance text-bone sm:text-[11px] sm:tracking-[0.16em]">
-          Free delivery over PKR 8,000 · Cash on Delivery available
-        </div>
+      <header className={`no-print z-40 ${pathname === "/" ? "fixed inset-x-0 top-0" : "sticky top-0"} ${overHero ? "border-b border-transparent bg-transparent text-bone" : "border-b border-sand bg-bone/95 text-ink backdrop-blur"}`}>
+        <AnnouncementBar />
+        <div className={overHero ? "bg-ink/20" : ""}>
         <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-2 px-3 sm:gap-4 sm:px-4 md:px-8">
           <button
             type="button"
@@ -98,7 +111,7 @@ export function Navigation() {
           >
             <Menu strokeWidth={1.25} />
           </button>
-          <Link href="/" className="min-w-0 shrink font-serif text-[22px] leading-none tracking-[0.16em] text-ink sm:text-[28px] sm:tracking-[0.28em]">
+          <Link href="/" className="min-w-0 shrink font-serif text-[22px] leading-none tracking-[0.16em] sm:text-[28px] sm:tracking-[0.28em]">
             EVOLVE
           </Link>
           <nav className="ml-6 hidden items-center gap-6 lg:flex" aria-label="Primary">
@@ -112,7 +125,7 @@ export function Navigation() {
                     {link.label}
                   </Link>
                   <div className="invisible absolute top-full left-0 z-20 hidden pt-2 group-hover:visible group-hover:block group-focus-within:visible group-focus-within:block">
-                    <div className="min-w-56 border border-sand bg-bone p-4 shadow-none">
+                    <div className="min-w-56 border border-sand bg-bone p-4 text-ink shadow-none">
                       {link.items.map((item) => (
                         <Link
                           key={item.href}
@@ -170,8 +183,9 @@ export function Navigation() {
             </button>
           </div>
         </div>
+        </div>
         {searchOpen ? (
-          <div className="border-t border-sand bg-bone">
+          <div className="border-t border-sand bg-bone text-ink">
             <form onSubmit={onSearch} className="mx-auto max-w-[1440px] px-4 py-4 md:px-8">
               <label className="mb-2 block text-[11px] uppercase tracking-[0.16em] text-stone-deep" htmlFor="site-search">
                 Search the house

@@ -38,12 +38,17 @@ export const metadata: Metadata = {
     siteName: "EVOLVE",
     type: "website",
     locale: "en_PK",
+    images: [{ url: "/brand/logo.jpg", alt: "EVOLVE — Evolve Your Style" }],
+  },
+  twitter: {
+    card: "summary_large_image",
+    images: ["/brand/logo.jpg"],
   },
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="en" className={`${sans.variable} ${serif.variable} h-full antialiased`}>
+    <html lang="en" data-scroll-behavior="smooth" className={`${sans.variable} ${serif.variable} h-full antialiased`}>
       <body className="flex min-h-full flex-col bg-bone font-sans text-ink">
         <a href="#main" className="sr-only focus:not-sr-only focus:absolute focus:top-2 focus:left-2 focus:z-50 focus:bg-bone focus:px-3 focus:py-2">
           Skip to content
@@ -57,6 +62,8 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
             slogan: site.tagline,
             email: site.email,
             logo: `${site.url}/brand/logo.jpg`,
+            sameAs: [site.instagram, site.facebook, site.tiktok, site.youtube],
+            ...(site.address ? { address: { "@type": "PostalAddress", streetAddress: site.address, addressCountry: "PK" } } : {}),
           }}
         />
         <JsonLd

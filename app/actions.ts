@@ -364,15 +364,41 @@ export async function submitReview(_prev: { message?: string; ok?: boolean } | n
   return { ok: true, message: "Thank you. Your review will appear after it is read by the studio." };
 }
 
+async function turnstilePasses(token: string): Promise<boolean> {
+  const secret = process.env.TURNSTILE_SECRET_KEY;
+  if (!secret) return true;
+  if (!token) return false;
+  try {
+    const response = await fetch("https://challenges.cloudflare.com/turnstile/v0/siteverify", {
+      method: "POST",
+      headers: { "content-type": "application/x-www-form-urlencoded" },
+      body: new URLSearchParams({ secret, response: token }),
+    });
+    const data = (await response.json()) as { success?: boolean };
+    return data.success === true;
+  } catch {
+    return false;
+  }
+}
+
 export async function subscribe(_prev: { message?: string; ok?: boolean } | null, formData: FormData) {
+  if (String(formData.get("company") ?? "").trim()) return { ok: true, message: "You are on the list." };
+  const source = String(formData.get("source") ?? "");
+  if (source === "circle" && formData.get("consent") !== "yes") {
+    return { message: "Please confirm you want to hear from us." };
+  }
+  if (!(await turnstilePasses(String(formData.get("cf-turnstile-response") ?? "")))) {
+    return { message: "Confirm you are a person and try again." };
+  }
   const email = String(formData.get("email") ?? "").trim();
   const phoneRaw = String(formData.get("phone") ?? "").trim();
   const phone = phoneRaw ? normalizePhone(phoneRaw) : null;
   if (!email && !phoneRaw) return { message: "Add an email or a WhatsApp number." };
   if (email && !z.email().safeParse(email).success) return { message: "Enter a valid email." };
   if (phoneRaw && !phone) return { message: "Use a Pakistani mobile number, or leave WhatsApp blank." };
-  await saveSubscriber({ email: email || undefined, phone: phone || undefined });
-  return { ok: true, message: "You are on the list." };
+  const saved = await saveSubscriber({ email: email || undefined, phone: phone || undefined });
+  if (saved === "exists") return { ok: true, message: "You are already on the list." };
+  return { ok: true, message: source === "circle" ? "You are on the list for early access." : "You are on the list." };
 }
 
 export async function sendMessage(_prev: { message?: string; ok?: boolean } | null, formData: FormData) {

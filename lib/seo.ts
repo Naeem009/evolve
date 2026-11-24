@@ -12,6 +12,13 @@ export function pageMeta(title: string, description: string, path: string): Meta
       url: path,
       siteName: "EVOLVE",
       type: "website",
+      images: [{ url: "/brand/logo.jpg", alt: "EVOLVE — Evolve Your Style" }],
+    },
+    twitter: {
+      card: "summary_large_image",
+      title,
+      description: text,
+      images: ["/brand/logo.jpg"],
     },
   };
 }
