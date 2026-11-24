@@ -74,7 +74,7 @@ export function ProductRail({
   return (
     <section className="py-4">
       {heading}
-      <div className="grid w-full grid-cols-2 gap-px bg-sand lg:grid-cols-3">
+      <div className={products.length <= 3 ? "grid w-full grid-cols-1 gap-px bg-sand md:grid-cols-3" : "grid w-full grid-cols-2 gap-px bg-sand lg:grid-cols-3"}>
         {products.map((product) => (
           <HomeProductCard key={product.handle} product={product} listName={section.listName} sizes="(max-width: 1024px) 50vw, 34vw" />
         ))}
